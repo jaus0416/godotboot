@@ -40,3 +40,5 @@ project file
 		
 ### 工具集
 + Logger: 日志工具
++ ConfigLoader: 配置加载器
++ LocalizationConfig: 本地化配置工具

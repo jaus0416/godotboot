@@ -1,7 +1,12 @@
 ## 全局配置管理器
+## 主要用于配置初始化，也可以从 config_arr中获取配置单例
 extends Node
 
-var config_arr : Array[Configuration] = []
+enum CONFIG_KEYS {
+	LocalizationConfig,
+}
+
+var configs = {}
 
 func _ready() -> void:
 	_register_config()
@@ -11,27 +16,31 @@ func _ready() -> void:
 # 注册启动配置
 func _register_config() -> void:
 	# 本地化
-	register(LocalizationConfig.new())
+	register(CONFIG_KEYS.LocalizationConfig, LocalizationConfig.new())
 	pass
 
 # 初始化启动配置
 func _init_config() -> void:
 	Logger.log("[InitConfig] start ...")
-	if config_arr != null and config_arr.size() > 0:
-		for _config in config_arr:
+	if configs != null and configs.size() > 0:
+		for _config in configs.values():
 			if _config != null:
 				_config.init()
 	Logger.log("[InitConfig] finished ...")
 	pass
 
 ## 注册配置
-func register(config : Configuration) -> void:
+func register(key : CONFIG_KEYS, config : Configuration) -> void:
 	if config != null:
-		config_arr.append(config)
+		configs[key] = config
 	pass
 
 ## 取消注册配置
-func unregister(config : Configuration) -> void:
-	if config != null:
-		config_arr.erase(config)
+func unregister(key : CONFIG_KEYS) -> void:
+	if key != null:
+		configs.erase(key)
 	pass
+
+## 获取配置类
+func get_configuration(key : CONFIG_KEYS) -> Configuration:
+	return configs.get(key)
