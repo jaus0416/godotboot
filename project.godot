@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="godotboot"
+run/main_scene="res://src/presentation/stages/demo/demo.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GlobalConfigManager="*res://src/common/global/global_config_manager.gd"
 
 [display]
 
