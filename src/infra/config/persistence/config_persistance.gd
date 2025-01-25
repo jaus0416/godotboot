@@ -1,26 +1,46 @@
 # 用于存储/加载配置
-# 该工具默认配置文件是一个，如果希望多个，可以使用 ConfigFile 另外扩展 MultiConfigLoader
-class_name ConfigLoader extends Node
+class_name ConfigPersistance extends Node
+
+static var _instance : ConfigPersistance
 
 # 默认存储路径
 const DEFAULT_CONFIG_FILENAME = "system_setting.ini"
 const DEFAULT_SECTION = "Settings"
 # 存储文件名称
-static var file_path : String = DEFAULT_CONFIG_FILENAME : set = _set_file_path
+var file_path : String = DEFAULT_CONFIG_FILENAME : set = _set_file_path
 # 加密key
-static var encrypt_key : PackedByteArray
+var encrypt_key : PackedByteArray
 # 加密密码
-static var encrypt_password : String
+var encrypt_password : String
+
+# 单例，不要new
+static func get_instance() -> ConfigPersistance:
+	if _instance == null:
+		new()
+		_instance.init()
+	return _instance
 
 # 存储配置
-static func set_value(key: String, value: Variant, section: String = DEFAULT_SECTION) -> Error:
+func save_value(key: String, value: Variant, section: String = DEFAULT_SECTION) -> Error:
 	var _config = ConfigFile.new()
 	_load(_config)
 	_config.set_value(section, key, value)
 	return _save(_config)
 
+# 批量存储配置
+func batch_save_value(key_pairs : Dictionary, section: String = DEFAULT_SECTION) -> Error:
+	if key_pairs == null or key_pairs.size() == 0:
+		return OK
+	var _config = ConfigFile.new()
+	_load(_config)
+	for key in key_pairs:
+		if key != null and key_pairs[key] != null:
+			_config.set_value(section, key, key_pairs[key])
+	return _save(_config)
+	
+
 # 加载配置
-static func load_value(key: String, section: String = DEFAULT_SECTION) -> Variant:
+func load_value(key: String, section: String = DEFAULT_SECTION) -> Variant:
 	var _config = ConfigFile.new()
 	if _load(_config) == OK:
 		if _config.has_section_key(section, key):
@@ -28,7 +48,7 @@ static func load_value(key: String, section: String = DEFAULT_SECTION) -> Varian
 	return null
 
 # 是否包含配置
-static func has_key(key: String, section: String = DEFAULT_SECTION) -> bool:
+func has_key(key: String, section: String = DEFAULT_SECTION) -> bool:
 	var _config = ConfigFile.new()
 	if _load(_config) == OK :
 		return _config.has_section_key(section, key)
@@ -36,14 +56,14 @@ static func has_key(key: String, section: String = DEFAULT_SECTION) -> bool:
 		return false
 		
 # 删除键
-static func erase_section_key(key: String, section: String = DEFAULT_SECTION) -> void:
+func erase_section_key(key: String, section: String = DEFAULT_SECTION) -> void:
 	var _config = ConfigFile.new()
 	if _load(_config) == OK and _config.has_section_key(section, key):
 		_config.erase_section_key(section, key)
 		_save(_config)
 
 # 删除section
-static func erase_section(section: String = DEFAULT_SECTION) -> void:
+func erase_section(section: String = DEFAULT_SECTION) -> void:
 	var _config = ConfigFile.new()
 	if _load(_config) == OK and _config.has_section(section):
 		_config.erase_section(section)
@@ -51,15 +71,15 @@ static func erase_section(section: String = DEFAULT_SECTION) -> void:
 
 
 # ======== 内部方法 =======
-static func _set_file_path(value : String) -> void:
+func _set_file_path(value : String) -> void:
 	if file_path != null:
 		file_path = value
 	pass
 
-static func _get_config_path() -> String: 
+func _get_config_path() -> String: 
 	return FileUtil.SAVE_PATH_PREFIX + file_path
 
-static func _save(_config : ConfigFile, path : String = _get_config_path()) -> Error:
+func _save(_config : ConfigFile, path : String = _get_config_path()) -> Error:
 	if encrypt_key != null and encrypt_key.size() > 0:
 		return _config.save_encrypted(path, encrypt_key)
 	elif encrypt_password != null and not encrypt_password.is_empty():
@@ -67,7 +87,7 @@ static func _save(_config : ConfigFile, path : String = _get_config_path()) -> E
 	else:
 		return _config.save(path)
 
-static func _load(_config : ConfigFile, path : String = _get_config_path()) -> Error:
+func _load(_config : ConfigFile, path : String = _get_config_path()) -> Error:
 	if encrypt_key != null and encrypt_key.size() > 0:
 		return _config.load_encrypted(path, encrypt_key)
 	elif encrypt_password != null and not encrypt_password.is_empty():
