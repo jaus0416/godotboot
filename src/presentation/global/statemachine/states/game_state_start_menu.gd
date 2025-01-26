@@ -17,5 +17,5 @@ func exit():
 	pass
 
 func _exec() -> void:
-	# do nothing
+	UIManager.show_start_menu()
 	pass
