@@ -41,5 +41,5 @@ project file
   
 ### utils
 + Logger: A logging tool
-+ ConfigLoader: Configuration Loader
-+ LocalizationConfig: localization config util
++ SystemSetting: For system setting
++ GameStateMachine: System state machine

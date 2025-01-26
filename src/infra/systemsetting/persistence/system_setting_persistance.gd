@@ -1,11 +1,11 @@
 # 用于存储/加载配置
-class_name ConfigPersistance extends Node
+class_name SystemSettingPersistance extends Node
 
-static var _instance : ConfigPersistance
+static var _instance : SystemSettingPersistance
 
 # 默认存储路径
 const DEFAULT_CONFIG_FILENAME = "system_setting.ini"
-const DEFAULT_SECTION = "Settings"
+const DEFAULT_SECTION = "System Setting"
 # 存储文件名称
 var file_path : String = DEFAULT_CONFIG_FILENAME : set = _set_file_path
 # 加密key
@@ -14,10 +14,9 @@ var encrypt_key : PackedByteArray
 var encrypt_password : String
 
 # 单例，不要new
-static func get_instance() -> ConfigPersistance:
+static func get_instance() -> SystemSettingPersistance:
 	if _instance == null:
-		new()
-		_instance.init()
+		_instance = new()
 	return _instance
 
 # 存储配置

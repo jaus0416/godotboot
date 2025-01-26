@@ -1,13 +1,12 @@
-class_name ConfigRepo extends Node
+class_name SystemSettingRepo extends Node
 
-static var _instance : ConfigRepo
+static var _instance : SystemSettingRepo
 
-var persistance : ConfigPersistance = ConfigPersistance.get_instance()
+var persistance : SystemSettingPersistance = SystemSettingPersistance.get_instance()
 
-static func get_instance() -> ConfigRepo:
+static func get_instance() -> SystemSettingRepo:
 	if _instance == null:
-		new()
-		_instance.init()
+		_instance = new()
 	return _instance
 	
 # 存储配置
@@ -15,6 +14,10 @@ func save_value(key: String, value: Variant) -> void:
 	var result = persistance.save_value(key, value)
 	if result != OK:
 		Logger.logerr("batch_save_value error: result: " + result + ", key: " + key + ", value: " + str(value))
+	pass
+
+func set_value(key: String, value: Variant) -> void:
+	save_value(key, value)
 	pass
 
 # 批量存储配置

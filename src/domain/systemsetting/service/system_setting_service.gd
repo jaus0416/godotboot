@@ -1,29 +1,30 @@
-class_name ConfigService extends Node
+class_name SystemSettingService extends Node
 
-var _config : Config = Config.new()
+var _config : SystemSetting = SystemSetting.new()
 var _config_service_mapping : Dictionary = {}
-static var _instance : ConfigService
+static var _instance : SystemSettingService
 
 # 单例，不要new
-static func get_instance() -> ConfigService:
+static func get_instance() -> SystemSettingService:
 	if _instance == null:
-		new()
-		_instance.init()
+		_instance = new()
 	return _instance
 
 func _init() -> void:
 	# 注册所有service
-	_register_service(LocalizationConfigService.get_instace()) # 本地化
+	_register_service(LocalizationSystemSettingService.get_instace()) # 本地化
 	# 初始化config的值
 	_refresh_config()
+	
+	Logger.log("[SystemSetting]init system config: " + str(_config))
 	pass
 
-func get_config() -> Config:
+func get_system_setting() -> SystemSetting:
 	return _config
 
 # ========== 内部工具 ==========
 ## 注册配置
-func _register_service(service : BaseConfigValueService) -> void:
+func _register_service(service : BaseSystemSettingValueService) -> void:
 	if service == null:
 		return
 	if service.get_key() == null || service.get_key().is_empty():

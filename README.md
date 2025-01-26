@@ -40,5 +40,5 @@ project file
 		
 ### 工具集
 + Logger: 日志工具
-+ ConfigLoader: 配置加载器
-+ LocalizationConfig: 本地化配置工具
++ SystemSetting: 系统配置相关
++ GameStateMachine: 系统状态机
