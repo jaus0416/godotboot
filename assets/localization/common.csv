@@ -1,0 +1,28 @@
+id,zh,en
+startmenu_label_title,灵途喵影,SpiritPathKittyShadow
+startmenu_btn_startgame,开始游戏,start game
+startmenu_btn_loadgame,加载游戏,load game
+startmenu_btn_newgame,新游戏,new game
+startmenu_btn_exitgame,退出,exit
+startmenu_btn_setting,系统设置,system setting
+error_notify_label_title,系统错误,System Error
+error_notify_label_confirm,确认,OK
+error_messsage_default,系统出错了...,system error ...
+error_messsage_save_system_config_failed,系统设置存储失败,The system settings cannot be saved to the file.
+system_settings_btn_back,返回,back
+system_settings_btn_apply,保存,apply
+system_settings_btn_no,取消,No
+system_settings_btn_yes,确认,Yes
+system_settings_label_discard,取消保存所有修改？,Would you like to discard all changes done?
+system_settings_label_graphics,图像设置,Graphics
+system_settings_label_display_mode,显示模式,Display Mode
+system_settings_label_resolution,分辨率,Resolution
+system_settings_label_localization,区域设置,Localization
+system_settings_label_language,语言,Language
+system_settings_label_audio,音频,Audio
+system_settings_label_master_volume,总音量,Master
+system_settings_label_music_volume,音乐,Music
+system_settings_label_sfx_volume,音效（SFX）,SFX
+system_settings_resolution_fullscreen,全屏,Fullscreen
+system_settings_resolution_borderless_windowed,无边框窗口,Borderless Windowed
+system_settings_resolution_windowed,窗口,Windowed

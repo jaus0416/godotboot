@@ -1,0 +1,299 @@
+[gd_scene load_steps=9 format=3 uid="uid://cs67csm6wdk6t"]
+
+[ext_resource type="Theme" uid="uid://b6f153g7hbp1t" path="res://assets/themes/settings_theme.tres" id="1_gbmx3"]
+[ext_resource type="Script" path="res://src/system/menu/system_setting/scripts/system_setting.gd" id="1_ietit"]
+[ext_resource type="Script" path="res://src/system/menu/system_setting/scripts/base_setting_elements/settings_section.gd" id="2_35wok"]
+[ext_resource type="Script" path="res://src/system/menu/system_setting/scripts/setting_elements/display_mode.gd" id="3_4x8j2"]
+[ext_resource type="Script" path="res://src/system/menu/system_setting/scripts/setting_elements/resolution.gd" id="4_u8ip3"]
+[ext_resource type="Script" path="res://src/system/menu/system_setting/scripts/setting_elements/language.gd" id="5_auwvt"]
+[ext_resource type="Script" path="res://src/system/menu/system_setting/scripts/setting_elements/setting_volume.gd" id="6_2l4lv"]
+[ext_resource type="Texture2D" uid="uid://crhlvr7ptr235" path="res://assets/graphics/textures/system/setting_menu_background.png" id="8_txigd"]
+
+[node name="SystemSetting" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ietit")
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.501961)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_txigd")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 50
+
+[node name="SettingsPanel" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/SettingsPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Elements" type="VBoxContainer" parent="MarginContainer/SettingsPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Graphics" type="VBoxContainer" parent="MarginContainer/SettingsPanel/MarginContainer/Elements"]
+layout_mode = 2
+script = ExtResource("2_35wok")
+section_name = "graphics"
+
+[node name="SubSectionTitle" type="Label" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Graphics"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "system_settings_label_graphics"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Graphics"]
+layout_mode = 2
+
+[node name="SubSectionElements" type="VBoxContainer" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Graphics"]
+layout_mode = 2
+
+[node name="DisplayMode" type="HBoxContainer" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Graphics/SubSectionElements" node_paths=PackedStringArray("option_ref")]
+layout_mode = 2
+script = ExtResource("3_4x8j2")
+option_ref = NodePath("Options")
+store_key = "display_mode"
+default_value = "Windowed"
+
+[node name="Label" type="Label" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Graphics/SubSectionElements/DisplayMode"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "system_settings_label_display_mode"
+vertical_alignment = 1
+
+[node name="Options" type="OptionButton" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Graphics/SubSectionElements/DisplayMode"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+
+[node name="Resolution" type="HBoxContainer" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Graphics/SubSectionElements" node_paths=PackedStringArray("option_ref")]
+layout_mode = 2
+script = ExtResource("4_u8ip3")
+option_ref = NodePath("Options")
+store_key = "resolution"
+default_value = "1920x1080"
+
+[node name="Label" type="Label" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Graphics/SubSectionElements/Resolution"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "system_settings_label_resolution"
+vertical_alignment = 1
+
+[node name="Options" type="OptionButton" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Graphics/SubSectionElements/Resolution"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+
+[node name="Localization" type="VBoxContainer" parent="MarginContainer/SettingsPanel/MarginContainer/Elements"]
+layout_mode = 2
+script = ExtResource("2_35wok")
+section_name = "localization"
+
+[node name="SubSectionTitle" type="Label" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Localization"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "system_settings_label_localization"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Localization"]
+layout_mode = 2
+
+[node name="SubSectionElements" type="VBoxContainer" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Localization"]
+layout_mode = 2
+
+[node name="Language" type="HBoxContainer" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Localization/SubSectionElements" node_paths=PackedStringArray("option_ref")]
+layout_mode = 2
+script = ExtResource("5_auwvt")
+option_ref = NodePath("Options")
+store_key = "language"
+default_value = "English"
+
+[node name="Label" type="Label" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Localization/SubSectionElements/Language"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "system_settings_label_language"
+vertical_alignment = 1
+
+[node name="Options" type="OptionButton" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Localization/SubSectionElements/Language"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+
+[node name="Audio" type="VBoxContainer" parent="MarginContainer/SettingsPanel/MarginContainer/Elements"]
+layout_mode = 2
+script = ExtResource("2_35wok")
+section_name = "audio"
+
+[node name="SubSectionTitle" type="Label" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Audio"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "system_settings_label_audio"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Audio"]
+layout_mode = 2
+
+[node name="SubSectionElements" type="VBoxContainer" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Audio"]
+layout_mode = 2
+
+[node name="MasterVolume" type="HBoxContainer" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Audio/SubSectionElements" node_paths=PackedStringArray("slider_ref", "value_box_ref")]
+layout_mode = 2
+script = ExtResource("6_2l4lv")
+audio_bus = "Master"
+slider_ref = NodePath("HBoxContainer/HSlider")
+value_box_ref = NodePath("HBoxContainer/SpinBox")
+store_key = "master_volume"
+default_value = "10"
+
+[node name="Label" type="Label" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Audio/SubSectionElements/MasterVolume"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "system_settings_label_master_volume"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Audio/SubSectionElements/MasterVolume"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Audio/SubSectionElements/MasterVolume/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 0.0
+step = 0.0
+ticks_on_borders = true
+
+[node name="SpinBox" type="SpinBox" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Audio/SubSectionElements/MasterVolume/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme = ExtResource("1_gbmx3")
+max_value = 0.0
+step = 0.0
+
+[node name="MusicVolume" type="HBoxContainer" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Audio/SubSectionElements" node_paths=PackedStringArray("slider_ref", "value_box_ref")]
+layout_mode = 2
+script = ExtResource("6_2l4lv")
+audio_bus = "Music"
+slider_ref = NodePath("HBoxContainer/HSlider")
+value_box_ref = NodePath("HBoxContainer/SpinBox")
+store_key = "music_volume"
+default_value = "10"
+
+[node name="Label" type="Label" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Audio/SubSectionElements/MusicVolume"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "system_settings_label_music_volume"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Audio/SubSectionElements/MusicVolume"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Audio/SubSectionElements/MusicVolume/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 0.0
+step = 0.0
+ticks_on_borders = true
+
+[node name="SpinBox" type="SpinBox" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Audio/SubSectionElements/MusicVolume/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme = ExtResource("1_gbmx3")
+max_value = 0.0
+step = 0.0
+
+[node name="SFXVolume" type="HBoxContainer" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Audio/SubSectionElements" node_paths=PackedStringArray("slider_ref", "value_box_ref")]
+layout_mode = 2
+script = ExtResource("6_2l4lv")
+audio_bus = "SFX"
+slider_ref = NodePath("HBoxContainer/HSlider")
+value_box_ref = NodePath("HBoxContainer/SpinBox")
+store_key = "sfx_volume"
+default_value = "10"
+
+[node name="Label" type="Label" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Audio/SubSectionElements/SFXVolume"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "system_settings_label_sfx_volume"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Audio/SubSectionElements/SFXVolume"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Audio/SubSectionElements/SFXVolume/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 0.0
+step = 0.0
+ticks_on_borders = true
+
+[node name="SpinBox" type="SpinBox" parent="MarginContainer/SettingsPanel/MarginContainer/Elements/Audio/SubSectionElements/SFXVolume/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme = ExtResource("1_gbmx3")
+max_value = 0.0
+step = 0.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/SettingsPanel"]
+layout_mode = 2
+
+[node name="ApplyButton" type="Button" parent="MarginContainer/SettingsPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 40
+text = "system_settings_btn_apply"
+
+[node name="BackButton" type="Button" parent="MarginContainer/SettingsPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 40
+text = "system_settings_btn_back"
+
+[connection signal="pressed" from="MarginContainer/SettingsPanel/HBoxContainer/ApplyButton" to="." method="_on_apply_button_pressed"]
+[connection signal="pressed" from="MarginContainer/SettingsPanel/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

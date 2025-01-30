@@ -1,0 +1,100 @@
+[gd_scene load_steps=3 format=3 uid="uid://317qjn181fxy"]
+
+[ext_resource type="Texture2D" uid="uid://cpegfbfiresyi" path="res://assets/graphics/textures/system/start_menu_background.jpg" id="1_2epgw"]
+[ext_resource type="Script" path="res://src/system/menu/start_menu/scripts/start_menu.gd" id="1_6gh62"]
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6gh62")
+
+[node name="Background" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.501961)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_2epgw")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 50
+
+[node name="ControlPanel" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ControlPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="MarginContainer/ControlPanel/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.669791, 0.873674, 0.919763, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 80
+text = "startmenu_label_title"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ControlPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ControlPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ControlPanel/HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="StartGame" type="Button" parent="MarginContainer/ControlPanel/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "startmenu_btn_startgame"
+
+[node name="NewGame" type="Button" parent="MarginContainer/ControlPanel/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "startmenu_btn_newgame"
+
+[node name="Setting" type="Button" parent="MarginContainer/ControlPanel/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "startmenu_btn_setting"
+
+[node name="Exit" type="Button" parent="MarginContainer/ControlPanel/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "startmenu_btn_exitgame"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/ControlPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="MarginContainer/ControlPanel/HBoxContainer/MarginContainer/VBoxContainer/Setting" to="." method="_on_setting_pressed"]
+[connection signal="pressed" from="MarginContainer/ControlPanel/HBoxContainer/MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

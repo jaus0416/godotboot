@@ -11,13 +11,19 @@ config_version=5
 [application]
 
 config/name="godotboot"
-run/main_scene="res://src/presentation/stages/demo/demo.tscn"
+run/main_scene="res://src/game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+boot_splash/show_image=false
 config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout="res://assets/audio/audio_bus_layout.tres"
 
 [autoload]
 
-GlobalConfigManager="*res://src/common/global/global_config_manager.gd"
+UIManager="*res://src/system/global/ui_manager.gd"
+GameManager="*res://src/system/global/game_manager.gd"
 
 [display]
 
@@ -26,4 +32,4 @@ window/size/viewport_height=1080
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://asserts/localization/localization.en.translation", "res://asserts/localization/localization.zh.translation")
+locale/translations=PackedStringArray("res://assets/localization/common.en.translation", "res://assets/localization/common.zh.translation")
